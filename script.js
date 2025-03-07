@@ -83,3 +83,24 @@ function showDogs() {
 }
 
 window.onload = creaGriglia;
+
+// Funzione per creare i fuochi d'artificio
+function createFirework() {
+    const firework = document.createElement('div');
+    firework.classList.add('firework');
+    
+    // Posizione casuale sulla pagina
+    firework.style.left = `${Math.random() * window.innerWidth}px`;
+    firework.style.top = `${Math.random() * window.innerHeight}px`;
+
+    // Aggiungi il fuoco d'artificio alla pagina
+    document.body.appendChild(firework);
+
+    // Rimuovi il fuoco d'artificio dopo che l'animazione è finita
+    setTimeout(() => {
+        firework.remove();
+    }, 1000); // Durata dell'animazione dei fuochi d'artificio
+}
+
+// Genera fuochi d'artificio ogni 0.5 secondi
+setInterval(create
