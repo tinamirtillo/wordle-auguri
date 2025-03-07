@@ -8,25 +8,17 @@ body {
     background-color: #282c34;
     height: 100vh;
     overflow: hidden;
-    position: relative;
 }
 
 /* Messaggio di auguri */
 #message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    color: #fff;
-    z-index: 1000;
-    text-align: center;
-    display: none; /* Inizialmente nascosto */
-}
-
-/* Nascondi il messaggio se non completato */
-.hidden {
-    display: none;
+    position: fixed;         /* Blocca il messaggio in posizione fissa */
+    top: 50%;                /* Centra verticalmente */
+    left: 50%;               /* Centra orizzontalmente */
+    transform: translate(-50%, -50%); /* Centra perfettamente */
+    font-size: 24px;         /* Modifica la dimensione del font */
+    color: #fff;             /* Colore del testo */
+    z-index: 1000;           /* Porta il messaggio sopra gli altri elementi */
 }
 
 /* Fuochi d'artificio */
@@ -54,8 +46,9 @@ body {
 .dog {
     position: fixed;
     width: 80px;
-    bottom: 40px;
-    z-index: 500;
+    bottom: 40px;    /* Posizionato più in basso */
+    left: 10px;      /* Posizione più centrata */
+    z-index: 500;    /* Assicurati che non copra il messaggio */
 }
 
 /* Griglia di lettere per il gioco */
@@ -64,27 +57,4 @@ body {
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     z-index: 10;
-    position: absolute;
-    top: 20%;
-    width: 80%;
-}
-
-/* Modifiche per il responsive design */
-@media (max-width: 600px) {
-    #grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    #message {
-        font-size: 18px;
-    }
-
-    .dog {
-        width: 60px;
-    }
-
-    .firework {
-        width: 20px;
-        height: 20px;
-    }
 }

@@ -8,42 +8,58 @@ function createFirework() {
     firework.style.top = `${Math.random() * window.innerHeight}px`;
 
     // Aggiungi il fuoco d'artificio alla pagina
-    document.getElementById('fireworks').appendChild(firework);
+    document.body.appendChild(firework);
 
     // Rimuovi il fuoco d'artificio dopo che l'animazione è finita
     setTimeout(() => {
         firework.remove();
-    }, 1000);
+    }, 1000); // Durata dell'animazione dei fuochi d'artificio
 }
 
 // Genera fuochi d'artificio ogni 0.5 secondi
 setInterval(createFirework, 500);
 
-// Funzione che verifica la parola e mostra il messaggio di auguri
-function checkWordCompletion(word) {
-    if (word.toLowerCase() === "compleanno") {  // Modifica la parola da indovinare
-        document.getElementById('message').classList.remove('hidden');
+// Funzione per adattare gli elementi in modo responsive
+function adjustForMobile() {
+    // Ridurre la dimensione dei cagnolini sui telefoni
+    const dogs = document.querySelectorAll('.dog');
+    dogs.forEach(dog => {
+        dog.style.width = '80px';   // Aumenta la dimensione dei bassotti
+        dog.style.left = '10px';     // Posizione più centrata
+        dog.style.bottom = '40px';  // Posiziona i bassotti più in basso
+    });
+
+    // Cambiare la dimensione dei fuochi d'artificio e renderli più visibili
+    const fireworks = document.querySelectorAll('.firework');
+    fireworks.forEach(firework => {
+        firework.style.width = '15px';    // Aumentare la dimensione
+        firework.style.height = '15px';
+        firework.style.backgroundColor = 'gold';  // Colore più visibile
+        firework.style.animationDuration = '1s';   // Velocità dell'animazione
+    });
+
+    // Modifica la posizione del messaggio per dispositivi mobili
+    const message = document.getElementById('message');
+    if (message) {
+        message.style.fontSize = '20px';  // Aumentare la leggibilità del messaggio
+    }
+
+    // Modifica il layout della griglia per avere più spazio
+    const grid = document.getElementById('grid');
+    if (grid) {
+        grid.style.gridTemplateColumns = 'repeat(3, 50px)';  // Mostra solo 3 lettere per riga
     }
 }
 
-// Funzione per gestire la griglia di gioco
-function createGameGrid() {
-    const grid = document.getElementById('grid');
-    const letters = ['C', 'O', 'M', 'P', 'L', 'E', 'A', 'N', 'N', 'O'];  // Parola da indovinare
-    letters.forEach((letter) => {
-        const div = document.createElement('div');
-        div.textContent = letter;
-        div.classList.add('letter-box');
-        grid.appendChild(div);
-    });
+// Funzione che verifica la dimensione dello schermo
+function checkForResponsiveDesign() {
+    if (window.innerWidth <= 600) {
+        adjustForMobile();  // Attiva le modifiche per dispositivi mobili
+    }
 }
 
-// Chiamare la funzione che crea la griglia all'inizio
-createGameGrid();
+// Verifica se il design è responsivo ogni volta che la finestra cambia dimensione
+window.addEventListener('resize', checkForResponsiveDesign);
 
-// Modificare il comportamento in base alle interazioni o risultati del gioco
-// Esegui il check dopo che la parola è stata completata
-document.querySelector('#grid').addEventListener('click', function() {
-    // Simulazione di completamento parola
-    checkWordCompletion("Compleanno");  // Controlla la parola indovinata
-});
+// Chiamata iniziale per verificare la dimensione della finestra
+checkForResponsiveDesign();
