@@ -8,6 +8,7 @@ body {
     background-color: #282c34;
     height: 100vh;
     overflow: hidden;
+    position: relative; /* Assicurati che tutto venga visualizzato sopra il corpo */
 }
 
 /* Messaggio di auguri */
@@ -57,6 +58,9 @@ body {
     grid-template-columns: repeat(5, 1fr); /* 5 colonne di default */
     gap: 10px;
     z-index: 10;
+    position: absolute; /* Posiziona la griglia sopra il corpo */
+    top: 20%; /* Posizione della griglia in alto */
+    width: 80%; /* Larghezza della griglia */
 }
 
 /* Modifiche per il responsive design (mobile) */
