@@ -84,6 +84,8 @@ function showDogs() {
 
 window.onload = creaGriglia;
 
+
+
 // Funzione per creare i fuochi d'artificio
 function createFirework() {
     const firework = document.createElement('div');
