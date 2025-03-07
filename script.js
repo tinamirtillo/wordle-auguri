@@ -47,7 +47,7 @@ function adjustForMobile() {
     // Modifica il layout della griglia per avere più spazio
     const grid = document.getElementById('grid');
     if (grid) {
-        grid.style.gridTemplateColumns = 'repeat(3, 50px)';  // Mostra solo 3 lettere per riga
+        grid.style.gridTemplateColumns = 'repeat(3, 50px)';  // Mostra solo 3 lettere per riga su dispositivi mobili
     }
 }
 

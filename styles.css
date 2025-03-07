@@ -54,7 +54,27 @@ body {
 /* Griglia di lettere per il gioco */
 #grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr); /* 5 colonne di default */
     gap: 10px;
     z-index: 10;
+}
+
+/* Modifiche per il responsive design (mobile) */
+@media (max-width: 600px) {
+    #grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 colonne su schermi piccoli */
+    }
+
+    #message {
+        font-size: 18px;  /* Font più piccolo su dispositivi mobili */
+    }
+
+    .dog {
+        width: 60px;     /* Ridurre le dimensioni dei bassotti su mobile */
+    }
+
+    .firework {
+        width: 20px;     /* Aumenta la dimensione dei fuochi d'artificio */
+        height: 20px;
+    }
 }
