@@ -1,49 +1,83 @@
-// Funzione per creare i fuochi d'artificio
-function createFirework() {
-    const firework = document.createElement('div');
-    firework.classList.add('firework');
-    
-    // Posizione casuale sulla pagina
-    firework.style.left = `${Math.random() * window.innerWidth}px`;
-    firework.style.top = `${Math.random() * window.innerHeight}px`;
+const parolaSegreta = "LUCE";  // Cambia con la parola che vuoi!
+let tentativi = 0;
+const maxTentativi = 6;
 
-    // Aggiungi il fuoco d'artificio alla pagina
-    document.getElementById('fireworks').appendChild(firework);
-
-    // Rimuovi il fuoco d'artificio dopo che l'animazione è finita
-    setTimeout(() => {
-        firework.remove();
-    }, 1000);
-}
-
-// Genera fuochi d'artificio ogni 0.5 secondi
-setInterval(createFirework, 500);
-
-// Funzione che verifica la parola e mostra il messaggio di auguri
-function checkWordCompletion(word) {
-    if (word.toLowerCase() === "cane") {  // La parola da indovinare è "CANE"
-        document.getElementById('message').classList.remove('hidden');
+function creaGriglia() {
+    const grid = document.getElementById("grid");
+    for (let i = 0; i < maxTentativi * 5; i++) {
+        const div = document.createElement("div");
+        div.classList.add("letter-box");
+        grid.appendChild(div);
     }
 }
 
-// Funzione per gestire la griglia di gioco
-function createGameGrid() {
-    const grid = document.getElementById('grid');
-    const letters = ['C', 'A', 'N', 'E'];  // La parola da indovinare è "CANE"
-    letters.forEach((letter) => {
-        const div = document.createElement('div');
-        div.textContent = letter;
-        div.classList.add('letter-box');
-        grid.appendChild(div);
-    });
+function checkGuess() {
+    const guessInput = document.getElementById("guessInput");
+    let guess = guessInput.value.toUpperCase();
+
+    if (guess.length !== 4) {
+        alert("La parola deve essere di 4 lettere!");
+        return;
+    }
+
+    const grid = document.getElementById("grid");
+    const rowStart = tentativi * 4;
+    
+    for (let i = 0; i < 4; i++) {
+        const box = grid.children[rowStart + i];
+        box.textContent = guess[i];
+
+        if (guess[i] === parolaSegreta[i]) {
+            box.classList.add("correct");
+        } else if (parolaSegreta.includes(guess[i])) {
+            box.classList.add("present");
+        } else {
+            box.classList.add("absent");
+        }
+    }
+
+    tentativi++;
+    guessInput.value = "";
+
+    if (guess === parolaSegreta) {
+        document.getElementById("message").textContent = "Brava! 🎉 Ecco il tuo messaggio: Buon Compleanno! 🎂";
+        guessInput.disabled = true;
+    } else if (tentativi >= maxTentativi) {
+        document.getElementById("message").textContent = "Peccato! La parola era: " + parolaSegreta;
+        guessInput.disabled = true;
+    }
 }
 
-// Chiamare la funzione che crea la griglia all'inizio
-createGameGrid();
+window.onload = creaGriglia;
 
-// Modificare il comportamento in base alle interazioni o risultati del gioco
-// Esegui il check dopo che la parola è stata completata
-document.querySelector('#grid').addEventListener('click', function() {
-    // Simulazione di completamento parola
-    checkWordCompletion("Cane");  // Controlla la parola indovinata
-});
+function createFirework(x, y) {
+    for (let i = 0; i < 10; i++) {
+        let firework = document.createElement("div");
+        firework.classList.add("firework");
+        firework.style.left = `${x + Math.random() * 100 - 50}px`;
+        firework.style.top = `${y + Math.random() * 100 - 50}px`;
+        firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        document.body.appendChild(firework);
+        setTimeout(() => firework.remove(), 1000);
+    }
+}
+
+function triggerFireworks() {
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+            createFirework(window.innerWidth / 2, window.innerHeight / 3);
+        }, i * 500);
+    }
+}
+
+function showDogs() {
+    let dogs = ["dog1.png", "dog2.png", "dog3.png"];  // Usa i nomi delle immagini
+    dogs.forEach((dog, index) => {
+        let img = document.createElement("img");
+        img.src = dog;
+        img.classList.add("dog");
+        img.style.left = `${20 + index * 150}px`;
+        img.style.bottom = "20px";
+        document.body.appendChild(img);
+    });
+}

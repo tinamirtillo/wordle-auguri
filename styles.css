@@ -1,92 +1,94 @@
-/* Impostazioni generali */
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #282c34;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-}
-
-/* Messaggio di auguri */
-#message {
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    color: #fff;
-    z-index: 1000;
     text-align: center;
-    display: none; /* Inizialmente nascosto */
+    font-family: Arial, sans-serif;
 }
 
-/* Nascondi il messaggio se non completato */
-.hidden {
-    display: none;
-}
-
-/* Fuochi d'artificio */
-.firework {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: gold;
-    animation: firework-animation 1s ease-out;
-}
-
-@keyframes firework-animation {
-    0% {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(3) translateY(-150px);
-        opacity: 0;
-    }
-}
-
-/* Cagnolini */
-.dog {
-    position: fixed;
-    width: 80px;
-    bottom: 40px;
-    z-index: 500;
-}
-
-/* Griglia di lettere per il gioco */
 #grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonne per la parola "CANE" */
-    gap: 10px;
-    z-index: 10;
-    position: absolute;
-    top: 30%;
-    width: 60%; /* Impostato per centrare la griglia */
+    grid-template-columns: repeat(5, 50px);
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
-/* Modifiche per il responsive design */
-@media (max-width: 600px) {
-    #grid {
-        grid-template-columns: repeat(4, 1fr);
-        width: 80%; /* Griglia più grande su schermi piccoli */
-    }
+.letter-box {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border: 2px solid black;
+    text-transform: uppercase;
+}
 
-    #message {
-        font-size: 18px;
-    }
+.correct {
+    background-color: green;
+    color: white;
+}
 
+.present {
+    background-color: gold;
+    color: white;
+}
+
+.absent {
+    background-color: gray;
+    color: white;
+}
+
+#guessInput {
+    text-transform: uppercase;
+}
+
+@keyframes fireworks {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: gold;
+    border-radius: 50%;
+    animation: fireworks 1s ease-out forwards;
+}
+
+.dog {
+    position: absolute;
+    width: 100px;
+    animation: bounce 1s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+
+/* Responsive design per dispositivi mobili */
+@media screen and (max-width: 600px) {
+    /* Ridurre la dimensione dei cagnolini sui telefoni */
     .dog {
-        width: 60px;
+        width: 70px;
+        left: 10px; /* Posizione più centrata */
+        bottom: 10px; /* Posizionamento più alto */
     }
 
+    /* Allineare i fuochi d'artificio più vicino */
     .firework {
-        width: 20px;
-        height: 20px;
+        width: 5px;
+        height: 5px;
+        animation-duration: 0.5s; /* Fuochi d'artificio più veloci */
+    }
+
+    /* Modifica la posizione del messaggio */
+    #message {
+        font-size: 18px; /* Ridurre la dimensione del messaggio */
+    }
+
+    /* Modifica il layout del grid per avere più spazio */
+    #grid {
+        grid-template-columns: repeat(3, 50px); /* Mostra solo 3 lettere per riga */
     }
 }
