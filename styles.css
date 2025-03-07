@@ -3,22 +3,31 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     background-color: #282c34;
     height: 100vh;
     overflow: hidden;
+    position: relative;
 }
 
 /* Messaggio di auguri */
 #message {
-    position: fixed;         /* Blocca il messaggio in posizione fissa */
-    top: 50%;                /* Centra verticalmente */
-    left: 50%;               /* Centra orizzontalmente */
-    transform: translate(-50%, -50%); /* Centra perfettamente */
-    font-size: 24px;         /* Modifica la dimensione del font */
-    color: #fff;             /* Colore del testo */
-    z-index: 1000;           /* Porta il messaggio sopra gli altri elementi */
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #fff;
+    z-index: 1000;
+    text-align: center;
+    display: none; /* Inizialmente nascosto */
+}
+
+/* Nascondi il messaggio se non completato */
+.hidden {
+    display: none;
 }
 
 /* Fuochi d'artificio */
@@ -46,15 +55,38 @@ body {
 .dog {
     position: fixed;
     width: 80px;
-    bottom: 40px;    /* Posizionato più in basso */
-    left: 10px;      /* Posizione più centrata */
-    z-index: 500;    /* Assicurati che non copra il messaggio */
+    bottom: 40px;
+    z-index: 500;
 }
 
 /* Griglia di lettere per il gioco */
 #grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* 4 colonne per la parola "CANE" */
     gap: 10px;
     z-index: 10;
+    position: absolute;
+    top: 30%;
+    width: 60%; /* Impostato per centrare la griglia */
+}
+
+/* Modifiche per il responsive design */
+@media (max-width: 600px) {
+    #grid {
+        grid-template-columns: repeat(4, 1fr);
+        width: 80%; /* Griglia più grande su schermi piccoli */
+    }
+
+    #message {
+        font-size: 18px;
+    }
+
+    .dog {
+        width: 60px;
+    }
+
+    .firework {
+        width: 20px;
+        height: 20px;
+    }
 }
